@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.user.mapper.RealtionMapper">
+  <resultMap id="BaseResultMap" type="com.ikun.user.pojo.Realtion">
+    <result column="self" jdbcType="VARCHAR" property="self" />
+    <result column="fans" jdbcType="VARCHAR" property="fans" />
+    <result column="def1" jdbcType="VARCHAR" property="def1" />
+    <result column="def2" jdbcType="VARCHAR" property="def2" />
+    <result column="def3" jdbcType="VARCHAR" property="def3" />
+    <result column="def4" jdbcType="VARCHAR" property="def4" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ikun.user.pojo.Realtion">
+    insert into realtion (self, fans, def1, 
+      def2, def3, def4)
+    values (#{self,jdbcType=VARCHAR}, #{fans,jdbcType=VARCHAR}, #{def1,jdbcType=VARCHAR}, 
+      #{def2,jdbcType=VARCHAR}, #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ikun.user.pojo.Realtion">
+    insert into realtion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="self != null">
+        self,
+      </if>
+      <if test="fans != null">
+        fans,
+      </if>
+      <if test="def1 != null">
+        def1,
+      </if>
+      <if test="def2 != null">
+        def2,
+      </if>
+      <if test="def3 != null">
+        def3,
+      </if>
+      <if test="def4 != null">
+        def4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="self != null">
+        #{self,jdbcType=VARCHAR},
+      </if>
+      <if test="fans != null">
+        #{fans,jdbcType=VARCHAR},
+      </if>
+      <if test="def1 != null">
+        #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
