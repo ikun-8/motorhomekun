@@ -14,7 +14,8 @@ public class MfServiceImpl implements MfService {
     MessageMapper messageMapper;
     @Override
     public List<Message> search(String content) {
-        return messageMapper.selectByCnT(content);
+//        return messageMapper.selectByCnT(content);
+        return null;
     }
 
     @Override
@@ -29,6 +30,6 @@ public class MfServiceImpl implements MfService {
 
     @Override
     public int delete(String uid) {
-        return messageMapper.deleteByPrimaryKey(uid);
+        return messageMapper.deleteByPrimaryKey(Integer.valueOf(uid));
     }
 }

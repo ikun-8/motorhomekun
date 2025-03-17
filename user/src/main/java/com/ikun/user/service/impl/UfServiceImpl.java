@@ -1,6 +1,6 @@
 package com.ikun.user.service.impl;
 
-import com.ikun.user.mapper.RealtionMapper;
+//import com.ikun.user.mapper.RealtionMapper;
 import com.ikun.user.mapper.UserMapper;
 import com.ikun.user.pojo.User;
 import com.ikun.user.service.UfService;
@@ -12,12 +12,13 @@ import org.springframework.stereotype.Service;
 public class UfServiceImpl implements UfService {
     @Autowired
     UserMapper userMapper;
-    @Autowired
-    RealtionMapper realtionMapper;
+//    @Autowired
+//    RealtionMapper realtionMapper;
     @Override
     public User login(User u) {
 
-        return userMapper.selectByUnP(u);
+//        return userMapper.selectByUnP(u);
+        return null;
 
     }
 
@@ -34,6 +35,7 @@ public class UfServiceImpl implements UfService {
 
     @Override
     public int delete(String id) {
-        return userMapper.logof(Integer.valueOf(id));
+//        return userMapper.logof(Integer.valueOf(id));
+        return 1;
     }
 }

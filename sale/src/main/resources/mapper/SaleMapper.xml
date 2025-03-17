@@ -138,4 +138,11 @@
       shopname = #{shopname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="remove">
+
+
+  </update>
+  <select id="filter">
+
+    </select>
 </mapper>

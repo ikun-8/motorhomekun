@@ -132,21 +132,24 @@ class GoodsApplicationTests {
             ,"香港"
             ,"澳门"
     };
+
     @Test
     public void insert() throws Exception {
         Random rand = new Random();
+        Goods g=new Goods();
         for(int i=0;i<400;i++){
-            Goods g=new Goods();
             g.setBrand(name[rand.nextInt(27)]);
             g.setPrice(String.valueOf((rand.nextInt(1000000)+500000)));
+            g.setOldprice(String.valueOf((rand.nextInt(2000000)+500000)));
             g.setChassis(chassis[rand.nextInt(46)]);
             g.setLocation(location[rand.nextInt(29)]);
             g.setEmission(String.valueOf(rand.nextInt(10)));
+            g.setUid(String.valueOf(rand.nextInt(1000)));
             g.setNumber(rand.nextInt(5));
             g.setGap(String.valueOf(rand.nextInt(999)));
             int year=rand.nextInt(50)+1985;
             int month=rand.nextInt(12)+1;
-            int day= rand.nextInt(30)+1;
+            int day= rand.nextInt(29)+1;
             LocalDate l=LocalDate.of(year,month,day);
             g.setLicensetime(l);
             g.setUsetime(rand.nextInt(8));

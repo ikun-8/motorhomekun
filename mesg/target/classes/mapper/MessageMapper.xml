@@ -2,61 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ikun.mesg.mapper.MessageMapper">
   <resultMap id="BaseResultMap" type="com.ikun.mesg.pojo.Message">
-    <id column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="watch" jdbcType="INTEGER" property="watch" />
     <result column="pic1" jdbcType="VARCHAR" property="pic1" />
     <result column="pic2" jdbcType="VARCHAR" property="pic2" />
     <result column="pic3" jdbcType="VARCHAR" property="pic3" />
     <result column="def1" jdbcType="VARCHAR" property="def1" />
     <result column="def2" jdbcType="VARCHAR" property="def2" />
     <result column="def3" jdbcType="VARCHAR" property="def3" />
+    <result column="def4" jdbcType="VARCHAR" property="def4" />
   </resultMap>
   <sql id="Base_Column_List">
-    uid, uname, title, type, time, content, pic1, pic2, pic3, def1, def2, def3
+    id, uid, title, type, time, content, watch, pic1, pic2, pic3, def1, def2, def3, def4
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from message
-    where uid = #{uid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="show" resultType="com.ikun.mesg.pojo.Message">
-      select * from message where time>"2024.01.01"
-    </select>
-  <select id="selectByCnT" resultType="com.ikun.mesg.pojo.Message">
-    select
-        <include refid="Base_Column_List" />
-    <bind name="newTitle" value="'%'+content+'%'"/>
-    <bind name="newUname" value="'%'+content+'%'"/>
-    from message
-    where title like #{newTitle} or uname like #{newUname}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from message
-    where uid = #{uid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ikun.mesg.pojo.Message">
-    insert into message (uid, uname, title, 
+    insert into message (id, uid, title, 
       type, time, content, 
-      pic1, pic2, pic3, def1, 
-      def2, def3)
-    values (#{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      watch, pic1, pic2, 
+      pic3, def1, def2, def3, 
+      def4)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{type,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
-      #{pic1,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{def1,jdbcType=VARCHAR}, 
-      #{def2,jdbcType=VARCHAR}, #{def3,jdbcType=VARCHAR})
+      #{watch,jdbcType=INTEGER}, #{pic1,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR}, 
+      #{pic3,jdbcType=VARCHAR}, #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, #{def3,jdbcType=VARCHAR}, 
+      #{def4,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ikun.mesg.pojo.Message">
     insert into message
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="uid != null">
         uid,
-      </if>
-      <if test="uname != null">
-        uname,
       </if>
       <if test="title != null">
         title,
@@ -69,6 +62,9 @@
       </if>
       <if test="content != null">
         content,
+      </if>
+      <if test="watch != null">
+        watch,
       </if>
       <if test="pic1 != null">
         pic1,
@@ -88,13 +84,16 @@
       <if test="def3 != null">
         def3,
       </if>
+      <if test="def4 != null">
+        def4,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="uname != null">
-        #{uname,jdbcType=VARCHAR},
       </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
@@ -107,6 +106,9 @@
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="watch != null">
+        #{watch,jdbcType=INTEGER},
       </if>
       <if test="pic1 != null">
         #{pic1,jdbcType=VARCHAR},
@@ -126,13 +128,16 @@
       <if test="def3 != null">
         #{def3,jdbcType=VARCHAR},
       </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ikun.mesg.pojo.Message">
     update message
     <set>
-      <if test="uname != null">
-        uname = #{uname,jdbcType=VARCHAR},
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
       </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
@@ -145,6 +150,9 @@
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="watch != null">
+        watch = #{watch,jdbcType=INTEGER},
       </if>
       <if test="pic1 != null">
         pic1 = #{pic1,jdbcType=VARCHAR},
@@ -164,22 +172,27 @@
       <if test="def3 != null">
         def3 = #{def3,jdbcType=VARCHAR},
       </if>
+      <if test="def4 != null">
+        def4 = #{def4,jdbcType=VARCHAR},
+      </if>
     </set>
-    where uid = #{uid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ikun.mesg.pojo.Message">
     update message
-    set uname = #{uname,jdbcType=VARCHAR},
+    set uid = #{uid,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=VARCHAR},
+      watch = #{watch,jdbcType=INTEGER},
       pic1 = #{pic1,jdbcType=VARCHAR},
       pic2 = #{pic2,jdbcType=VARCHAR},
       pic3 = #{pic3,jdbcType=VARCHAR},
       def1 = #{def1,jdbcType=VARCHAR},
       def2 = #{def2,jdbcType=VARCHAR},
-      def3 = #{def3,jdbcType=VARCHAR}
-    where uid = #{uid,jdbcType=VARCHAR}
+      def3 = #{def3,jdbcType=VARCHAR},
+      def4 = #{def4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

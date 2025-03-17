@@ -35,7 +35,11 @@
     from goods
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="filter" resultType="com.ikun.goods.pojo.Goods">
+
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from goods
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -289,5 +293,8 @@
       def3 = #{def3,jdbcType=VARCHAR},
       def4 = #{def4,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="remove">
+
   </update>
 </mapper>

@@ -9,10 +9,11 @@
     <result column="def1" jdbcType="VARCHAR" property="def1" />
     <result column="def2" jdbcType="VARCHAR" property="def2" />
     <result column="def3" jdbcType="VARCHAR" property="def3" />
+    <result column="def4" jdbcType="VARCHAR" property="def4" />
     <result column="shopname" jdbcType="VARCHAR" property="shopname" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, time, goodsid, status, def1, def2, def3, shopname
+    id, time, goodsid, status, def1, def2, def3, def4, shopname
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -20,28 +21,19 @@
     from sale
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="filter" parameterType="com.ikun.sale.pojo.Sale" resultType="com.ikun.sale.pojo.Sale">
-  select
-  <include refid="Base_Column_List"/>
-  from sale
-  <trim prefix="where" suffixOverrides="and">
-    <if test="time != null">time &lt; #{time} and </if>
-    <bind name="newShopname" value="'%'+shopname+'%'"/>
-    <if test="shopname != null"> shopname like #{newShopname} and </if>
-  </trim>
-  and status=1
-  </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sale
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.ikun.sale.pojo.Sale">
     insert into sale (id, time, goodsid, 
       status, def1, def2, 
-      def3, shopname)
+      def3, def4, shopname
+      )
     values (#{id,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{goodsid,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, 
-      #{def3,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR})
+      #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ikun.sale.pojo.Sale">
     insert into sale
@@ -66,6 +58,9 @@
       </if>
       <if test="def3 != null">
         def3,
+      </if>
+      <if test="def4 != null">
+        def4,
       </if>
       <if test="shopname != null">
         shopname,
@@ -93,6 +88,9 @@
       <if test="def3 != null">
         #{def3,jdbcType=VARCHAR},
       </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
       <if test="shopname != null">
         #{shopname,jdbcType=VARCHAR},
       </if>
@@ -119,6 +117,9 @@
       <if test="def3 != null">
         def3 = #{def3,jdbcType=VARCHAR},
       </if>
+      <if test="def4 != null">
+        def4 = #{def4,jdbcType=VARCHAR},
+      </if>
       <if test="shopname != null">
         shopname = #{shopname,jdbcType=VARCHAR},
       </if>
@@ -133,10 +134,15 @@
       def1 = #{def1,jdbcType=VARCHAR},
       def2 = #{def2,jdbcType=VARCHAR},
       def3 = #{def3,jdbcType=VARCHAR},
+      def4 = #{def4,jdbcType=VARCHAR},
       shopname = #{shopname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-<update id="remove" parameterType="java.lang.Integer">
-update sale set status=0 where id=#{id}
-</update>
+  <update id="remove">
+
+
+  </update>
+  <select id="filter">
+
+    </select>
 </mapper>

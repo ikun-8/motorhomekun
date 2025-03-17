@@ -1,12 +1,15 @@
 package com.ikun.goods.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
 
 
 @Data
@@ -19,9 +22,11 @@ public class Goods implements Serializable {
 
     private String brand;
 
-    private BigDecimal oldprice;
+    private String oldprice;
 
-    private BigDecimal price;
+    private String price;
+    private String startPrice;
+    private String endPrice;
 
     private String pic1;
 
@@ -40,8 +45,8 @@ public class Goods implements Serializable {
     private String location;
 
     private Integer number;
-
-    private Date licensetime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate licensetime;
 
     private Integer usetime;
 
