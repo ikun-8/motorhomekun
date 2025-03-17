@@ -1,0 +1,97 @@
+create table motorhomekun.goods
+(
+    id          int auto_increment primary key,
+    uid         varchar(255)   null,
+    brand       varchar(255)   null,
+    oldprice    decimal(10,2)  null,
+    price       decimal(10, 2) null,
+    pic1        varchar(255)   null,
+    pic2        varchar(255)   null,
+    pic3        varchar(255)   null,
+    `describe`  varchar(255)   null,
+    type        varchar(255)   null,
+    gap         varchar(255)   null,
+    emission    varchar(255)   null,
+    location    varchar(255)   null,
+    number      int            null,
+    licensetime date           null,
+    usetime     int            null,
+    chassis     varchar(255)   null,
+    status      int            null,
+    def1        varchar(255)   null,
+    def2        varchar(255)   null,
+    def3        varchar(255)   null,
+    def4        varchar(255)   null
+);
+
+create table motorhomekun.message
+(
+    id      int auto_increment primary key,
+    uid     varchar(255) not null,
+    title   varchar(255) null,
+    type    varchar(255) null,
+    time    datetime     null,
+    content varchar(255) null,
+    watch   int          null,
+    pic1    varchar(255) null,
+    pic2    varchar(255) null,
+    pic3    varchar(255) null,
+    def1    varchar(255) null,
+    def2    varchar(255) null,
+    def3    varchar(255) null,
+    def4    varchar(255) null
+);
+create table motorhomekun.mesbody
+(
+    mid     int,
+    uid     varchar(255) not null,
+    time    datetime     null,
+    content varchar(255) null,
+    def1    varchar(255) null,
+    def2    varchar(255) null,
+    def3    varchar(255) null,
+    def4    varchar(255) null
+);
+
+create table motorhomekun.realtion
+(
+    self varchar(255) not null,
+    fans varchar(255) not null,
+    def1 varchar(255) null,
+    def2 varchar(255) null,
+    def3 varchar(255) null,
+    def4 varchar(255) null
+);
+
+create table motorhomekun.sale
+(
+    id       int auto_increment primary key,
+    time     datetime     not null,
+    goodsid  varchar(255) null,
+    status   varchar(255) null,
+    def1     varchar(255) null,
+    def2     varchar(255) null,
+    def3     varchar(255) null,
+    def4     varchar(255) null,
+    shopname varchar(255) null
+);
+
+create table motorhomekun.user
+(
+    id       int auto_increment primary key,
+    name     varchar(255) not null,
+    password varchar(255) not null,
+    qq      varchar(255) null,
+    address varchar(255) null,
+    wx      varchar(255) null,
+    points   int          null,
+    headpic  varchar(255) null,
+    fans     int          null,
+    concern  int          null,
+    status   int          null,
+    def1     varchar(255) null,
+    def2     varchar(255) null,
+    def3     varchar(255) null,
+    def4     varchar(255) null
+);
+

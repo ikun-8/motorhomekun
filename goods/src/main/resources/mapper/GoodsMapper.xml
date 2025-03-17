@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.goods.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.ikun.goods.pojo.Goods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="oldprice" jdbcType="DECIMAL" property="oldprice" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="pic1" jdbcType="VARCHAR" property="pic1" />
+    <result column="pic2" jdbcType="VARCHAR" property="pic2" />
+    <result column="pic3" jdbcType="VARCHAR" property="pic3" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="gap" jdbcType="VARCHAR" property="gap" />
+    <result column="emission" jdbcType="VARCHAR" property="emission" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="licensetime" jdbcType="DATE" property="licensetime" />
+    <result column="usetime" jdbcType="INTEGER" property="usetime" />
+    <result column="chassis" jdbcType="VARCHAR" property="chassis" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="def1" jdbcType="VARCHAR" property="def1" />
+    <result column="def2" jdbcType="VARCHAR" property="def2" />
+    <result column="def3" jdbcType="VARCHAR" property="def3" />
+    <result column="def4" jdbcType="VARCHAR" property="def4" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, brand, oldprice, price, pic1, pic2, pic3, describe, type, gap, emission, 
+    location, number, licensetime, usetime, chassis, status, def1, def2, def3, def4
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ikun.goods.pojo.Goods">
+    insert into goods (id, uid, brand, 
+      oldprice, price, pic1, 
+      pic2, pic3, describe, 
+      type, gap, emission, 
+      location, number, licensetime, 
+      usetime, chassis, status, 
+      def1, def2, def3, def4
+      )
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{oldprice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{pic1,jdbcType=VARCHAR}, 
+      #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{gap,jdbcType=VARCHAR}, #{emission,jdbcType=VARCHAR}, 
+      #{location,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{licensetime,jdbcType=DATE}, 
+      #{usetime,jdbcType=INTEGER}, #{chassis,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ikun.goods.pojo.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="oldprice != null">
+        oldprice,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="pic1 != null">
+        pic1,
+      </if>
+      <if test="pic2 != null">
+        pic2,
+      </if>
+      <if test="pic3 != null">
+        pic3,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="gap != null">
+        gap,
+      </if>
+      <if test="emission != null">
+        emission,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="licensetime != null">
+        licensetime,
+      </if>
+      <if test="usetime != null">
+        usetime,
+      </if>
+      <if test="chassis != null">
+        chassis,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="def1 != null">
+        def1,
+      </if>
+      <if test="def2 != null">
+        def2,
+      </if>
+      <if test="def3 != null">
+        def3,
+      </if>
+      <if test="def4 != null">
+        def4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="oldprice != null">
+        #{oldprice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pic1 != null">
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null">
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null">
+        #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="gap != null">
+        #{gap,jdbcType=VARCHAR},
+      </if>
+      <if test="emission != null">
+        #{emission,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="licensetime != null">
+        #{licensetime,jdbcType=DATE},
+      </if>
+      <if test="usetime != null">
+        #{usetime,jdbcType=INTEGER},
+      </if>
+      <if test="chassis != null">
+        #{chassis,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="def1 != null">
+        #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ikun.goods.pojo.Goods">
+    update goods
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="oldprice != null">
+        oldprice = #{oldprice,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pic1 != null">
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null">
+        pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null">
+        pic3 = #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="gap != null">
+        gap = #{gap,jdbcType=VARCHAR},
+      </if>
+      <if test="emission != null">
+        emission = #{emission,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="licensetime != null">
+        licensetime = #{licensetime,jdbcType=DATE},
+      </if>
+      <if test="usetime != null">
+        usetime = #{usetime,jdbcType=INTEGER},
+      </if>
+      <if test="chassis != null">
+        chassis = #{chassis,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="def1 != null">
+        def1 = #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        def2 = #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        def3 = #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        def4 = #{def4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ikun.goods.pojo.Goods">
+    update goods
+    set uid = #{uid,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      oldprice = #{oldprice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      gap = #{gap,jdbcType=VARCHAR},
+      emission = #{emission,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      licensetime = #{licensetime,jdbcType=DATE},
+      usetime = #{usetime,jdbcType=INTEGER},
+      chassis = #{chassis,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      def1 = #{def1,jdbcType=VARCHAR},
+      def2 = #{def2,jdbcType=VARCHAR},
+      def3 = #{def3,jdbcType=VARCHAR},
+      def4 = #{def4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

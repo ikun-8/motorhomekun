@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.sale.mapper.SaleMapper">
+  <resultMap id="BaseResultMap" type="com.ikun.sale.pojo.Sale">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="goodsid" jdbcType="VARCHAR" property="goodsid" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="def1" jdbcType="VARCHAR" property="def1" />
+    <result column="def2" jdbcType="VARCHAR" property="def2" />
+    <result column="def3" jdbcType="VARCHAR" property="def3" />
+    <result column="shopname" jdbcType="VARCHAR" property="shopname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, time, goodsid, status, def1, def2, def3, shopname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sale
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="filter" parameterType="com.ikun.sale.pojo.Sale" resultType="com.ikun.sale.pojo.Sale">
+  select
+  <include refid="Base_Column_List"/>
+  from sale
+  <trim prefix="where" suffixOverrides="and">
+    <if test="time != null">time &lt; #{time} and </if>
+    <bind name="newShopname" value="'%'+shopname+'%'"/>
+    <if test="shopname != null"> shopname like #{newShopname} and </if>
+  </trim>
+  and status=1
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sale
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ikun.sale.pojo.Sale">
+    insert into sale (id, time, goodsid, 
+      status, def1, def2, 
+      def3, shopname)
+    values (#{id,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{goodsid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, 
+      #{def3,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ikun.sale.pojo.Sale">
+    insert into sale
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="def1 != null">
+        def1,
+      </if>
+      <if test="def2 != null">
+        def2,
+      </if>
+      <if test="def3 != null">
+        def3,
+      </if>
+      <if test="shopname != null">
+        shopname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="def1 != null">
+        #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="shopname != null">
+        #{shopname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ikun.sale.pojo.Sale">
+    update sale
+    <set>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="def1 != null">
+        def1 = #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        def2 = #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        def3 = #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="shopname != null">
+        shopname = #{shopname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ikun.sale.pojo.Sale">
+    update sale
+    set time = #{time,jdbcType=TIMESTAMP},
+      goodsid = #{goodsid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      def1 = #{def1,jdbcType=VARCHAR},
+      def2 = #{def2,jdbcType=VARCHAR},
+      def3 = #{def3,jdbcType=VARCHAR},
+      shopname = #{shopname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+<update id="remove" parameterType="java.lang.Integer">
+update sale set status=0 where id=#{id}
+</update>
+</mapper>
