@@ -20,4 +20,6 @@ public interface GoodsMapper {
     List<Goods> filter(Goods g);
 
     int remove(Integer integer);
+
+    List<Goods> show();
 }

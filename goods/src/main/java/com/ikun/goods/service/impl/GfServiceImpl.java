@@ -31,7 +31,15 @@ public class GfServiceImpl implements GfService {
     }
 
     @Override
+    public List<Goods> show() {
+        return goodsMapper.show();
+    }
+
+
+    @Override
     public int update(Goods g) {
+        if(goodsMapper.selectByPrimaryKey(g.getId())==null)
+            return -1;
         return goodsMapper.updateByPrimaryKeySelective(g);
     }
 

@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-@RestController
+@RestController("/goods")
 public class GfController {
     @Autowired
     GfService gfService;
@@ -19,7 +22,19 @@ public class GfController {
     @RequestMapping("/search")
     public ResultMsg search(@RequestBody Goods g){
 
-        List<Goods> data=gfService.search(g);
+        Map<String,Object> data=new LinkedHashMap();
+        List<Goods> goods=gfService.search(g);
+        data.put("total",goods.size());
+        data.put("goods",goods);
+        return new ResultMsg(200,data,"查询成功");
+
+    }
+    @RequestMapping("/show")
+    public ResultMsg show(){
+        List<Goods> goods=gfService.show();
+        Map<String,Object> data=new LinkedHashMap();
+        data.put("total",goods.size());
+        data.put("goods",goods);
         return new ResultMsg(200,data,"查询成功");
 
     }
@@ -35,8 +50,11 @@ public class GfController {
     @RequestMapping("/update")
     public ResultMsg update(@RequestBody Goods g){
 
+
         if(gfService.update(g)>0)
             return new ResultMsg(200,"更新成功");
+        else if(gfService.update(g)==-1)
+            return new ResultMsg(400,"不存在该商品");
         else
             return new ResultMsg(400,"更新失败");
 

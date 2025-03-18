@@ -26,8 +26,8 @@
     <result column="def4" jdbcType="VARCHAR" property="def4" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, uid, brand, oldprice, price, pic1, pic2, pic3, describe, type, gap, emission, 
-    location, number, licensetime, usetime, chassis, status, def1, def2, def3, def4
+    id, uid, brand, oldprice, price, pic1, pic2, pic3, `describe`, `type`, gap, emission,
+    location, `number`, licensetime, usetime, chassis, status, def1, def2, def3, def4
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,10 +36,71 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
     <select id="filter" resultType="com.ikun.goods.pojo.Goods">
-
-
+      select <include refid="Base_Column_List" />
+          from goods
+      <where>
+      <if test="id != null">
+        and id=#{id}
+      </if>
+      <if test="uid != null">
+        and uid=#{uid}
+      </if>
+      <if test="brand != null">
+        and brand=#{brand}
+      </if>
+      <if test="oldprice != null">
+        and oldprice=#{oldprice}
+      </if>
+      <if test="price != null">
+        and price between #{startPrice} and #{endPrice}
+      </if>
+      <if test="type != null">
+        and `type`=#{type}
+      </if>
+      <if test="gap != null">
+        and gap=#{gap}
+      </if>
+      <if test="emission != null">
+        and emission=#{emission}
+      </if>
+      <if test="location != null">
+        and location=#{location}
+      </if>
+      <if test="number != null">
+        and `number`=#{number}
+      </if>
+      <if test="licensetime != null">
+        and licensetime=#{licensetime}
+      </if>
+      <if test="usetime != null">
+        and usetime=#{usetime}
+      </if>
+      <if test="chassis != null">
+        and chassis=#{chassis}
+      </if>
+      <if test="status != null">
+        and status=#{status}
+      </if>
+      <if test="def1 != null">
+        and def1=#{def1}
+      </if>
+      <if test="def2 != null">
+        and def2=#{def2}
+      </if>
+      <if test="def3 != null">
+        and def3=#{def3}
+      </if>
+      <if test="def4 != null">
+        and def4=#{def4}
+      </if>
+      </where>
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="show" resultType="com.ikun.goods.pojo.Goods">
+    select
+        <include refid="Base_Column_List"/>
+    from goods where status=1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from goods
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -295,6 +356,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="remove">
+    update goods set status=#{status}
+    where id=#{id}
 
   </update>
 </mapper>
