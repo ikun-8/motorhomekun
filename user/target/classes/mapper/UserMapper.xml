@@ -19,7 +19,7 @@
     <result column="def4" jdbcType="VARCHAR" property="def4" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, password, qq, address, wx, points, headpic, fans, concern, status, def1, 
+    id, `name`, password, qq, address, wx, points, headpic, fans, concern, status, def1,
     def2, def3, def4
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -28,7 +28,13 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByUnP" resultType="com.ikun.user.pojo.User">
+      select
+          <include refid="Base_Column_List"/>
+      from user
+      where `name`=#{name} and password=#{password}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>

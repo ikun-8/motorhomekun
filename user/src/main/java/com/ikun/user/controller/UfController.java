@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequestMapping("/user")
 @RestController
 public class UfController {
     @Autowired
@@ -16,6 +17,7 @@ public class UfController {
 
     @RequestMapping("/login")
     public ResultMsg login(@RequestBody User u){
+        System.out.println(u);
         User us=ufService.login(u);
         if(us!=null)
             return new ResultMsg(200,us,"登录成功");

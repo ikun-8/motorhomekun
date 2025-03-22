@@ -17,8 +17,7 @@ public class UfServiceImpl implements UfService {
     @Override
     public User login(User u) {
 
-//        return userMapper.selectByUnP(u);
-        return null;
+        return userMapper.selectByUnP(u);
 
     }
 

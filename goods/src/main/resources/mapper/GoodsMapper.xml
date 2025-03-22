@@ -73,10 +73,11 @@
         and licensetime=#{licensetime}
       </if>
       <if test="usetime != null">
-        and usetime=#{usetime}
+        and usetime &lt;= #{usetime}
       </if>
       <if test="chassis != null">
-        and chassis=#{chassis}
+          <bind name="newChassis" value="'%'+chassis+'%'"/>
+        and chassis like #{newChassis}
       </if>
       <if test="status != null">
         and status=#{status}
