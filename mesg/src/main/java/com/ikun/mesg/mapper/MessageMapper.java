@@ -2,6 +2,8 @@ package com.ikun.mesg.mapper;
 
 import com.ikun.mesg.pojo.Message;
 
+import java.util.List;
+
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface MessageMapper {
     int updateByPrimaryKeySelective(Message record);
 
     int updateByPrimaryKey(Message record);
+
+    List<Message> show(String type);
 }

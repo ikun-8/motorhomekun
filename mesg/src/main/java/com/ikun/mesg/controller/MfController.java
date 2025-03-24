@@ -1,5 +1,6 @@
 package com.ikun.mesg.controller;
 
+import com.ikun.mesg.pojo.Mesbody;
 import com.ikun.mesg.pojo.Message;
 import com.ikun.mesg.pojo.ResultMsg;
 import com.ikun.mesg.service.MfService;
@@ -9,15 +10,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+@RequestMapping("/mes")
 @RestController
 public class MfController {
     @Autowired
     MfService mfService;
     @RequestMapping("/search")
     public ResultMsg search(String content){
-        List<Message> data=mfService.search(content);
+        Map<String,Object> data=new LinkedHashMap();
+        List<Message> mes=mfService.search(content);
+        data.put("total",mes.size());
+        data.put("mes",mes);
+        return new ResultMsg(200,data,"查询成功");
+    }
+    @RequestMapping("/show")
+    public ResultMsg show(String type){
+        System.out.println(type);
+        Map<String,Object> data=new LinkedHashMap();
+        List<Message> mes=mfService.show(type);
+        data.put("total",mes.size());
+        data.put("mes",mes);
         return new ResultMsg(200,data,"查询成功");
     }
     @RequestMapping("/update")
@@ -41,6 +58,14 @@ public class MfController {
             return new ResultMsg(200,"新增成功");
         else
             return new ResultMsg(400,"新增失败");
+    }
+    @RequestMapping("/searchBody")
+    public ResultMsg searchBody(String uid){
+        Map<String,Object> data=new LinkedHashMap();
+        List<Mesbody> mes=mfService.searchBody(uid);
+        data.put("total",mes.size());
+        data.put("mesBody",mes);
+        return new ResultMsg(200,data,"查询成功");
     }
 
 }

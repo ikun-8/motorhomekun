@@ -1,9 +1,12 @@
 package com.ikun.goods.service;
 
 import com.ikun.goods.pojo.Goods;
+import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
 
+
+//@FeignClient(name="goods-service",configuration = OpenFeignConfig.class)
 public interface GfService {
     public List<Goods> search(Goods g);
     public List<Goods> show();

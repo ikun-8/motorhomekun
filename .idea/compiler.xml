@@ -10,6 +10,7 @@
         <module name="goods" />
         <module name="sale" />
         <module name="user" />
+        <module name="gateway" />
         <module name="mesg" />
       </profile>
     </annotationProcessing>

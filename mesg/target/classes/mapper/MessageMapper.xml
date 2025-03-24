@@ -26,7 +26,13 @@
     from message
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="show" resultType="com.ikun.mesg.pojo.Message">
+      select
+          <include refid="Base_Column_List"/>
+      from message
+      where type=#{type}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from message
     where id = #{id,jdbcType=INTEGER}
   </delete>
