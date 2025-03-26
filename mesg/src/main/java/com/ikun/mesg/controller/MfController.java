@@ -22,6 +22,7 @@ public class MfController {
     MfService mfService;
     @RequestMapping("/search")
     public ResultMsg search(String content){
+        System.out.println(content);
         Map<String,Object> data=new LinkedHashMap();
         List<Message> mes=mfService.search(content);
         data.put("total",mes.size());
@@ -35,6 +36,7 @@ public class MfController {
         List<Message> mes=mfService.show(type);
         data.put("total",mes.size());
         data.put("mes",mes);
+//        System.out.println(mes);
         return new ResultMsg(200,data,"查询成功");
     }
     @RequestMapping("/update")

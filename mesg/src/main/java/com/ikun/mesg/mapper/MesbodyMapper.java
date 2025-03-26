@@ -11,4 +11,6 @@ public interface MesbodyMapper {
     int insertSelective(Mesbody record);
 
     List<Mesbody> selectByUid(String uid);
+
+    List<Mesbody> selectByMid(Integer id);
 }

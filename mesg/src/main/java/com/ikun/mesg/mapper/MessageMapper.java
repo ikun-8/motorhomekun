@@ -18,4 +18,6 @@ public interface MessageMapper {
     int updateByPrimaryKey(Message record);
 
     List<Message> show(String type);
+
+    List<Message> selectByCnT(String content);
 }

@@ -21,6 +21,7 @@ public class GfController {
 
     @RequestMapping("/search")
     public ResultMsg search(@RequestBody Goods g){
+        System.out.println(g);
 
         Map<String,Object> data=new LinkedHashMap();
         List<Goods> goods=gfService.search(g);

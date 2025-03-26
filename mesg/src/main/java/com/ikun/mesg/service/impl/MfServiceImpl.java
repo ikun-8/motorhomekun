@@ -18,13 +18,17 @@ public class MfServiceImpl implements MfService {
     MesbodyMapper mesbodyMapper;
     @Override
     public List<Message> search(String content) {
-//        return messageMapper.selectByCnT(content);
-        return null;
+        return messageMapper.selectByCnT(content);
     }
 
     @Override
     public List<Message> show(String type) {
-        return messageMapper.show(type);
+        List<Message> mes=messageMapper.show(type);
+
+        for(Message m:mes){
+            m.setMesbodyList(mesbodyMapper.selectByMid(m.getId()));
+        }
+        return mes;
     }
 
     @Override

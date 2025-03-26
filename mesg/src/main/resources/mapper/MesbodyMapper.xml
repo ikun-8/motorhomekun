@@ -77,4 +77,8 @@
     <select id="selectByUid" resultType="com.ikun.mesg.pojo.Mesbody">
         select * from mesbody where uid=#{uid}
     </select>
+    <select id="selectByMid" resultType="com.ikun.mesg.pojo.Mesbody">
+      select *
+        from mesbody where mid=#{id}
+    </select>
 </mapper>

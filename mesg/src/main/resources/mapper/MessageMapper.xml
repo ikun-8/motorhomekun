@@ -30,7 +30,15 @@
       select
           <include refid="Base_Column_List"/>
       from message
-      where type=#{type}
+      <if test="type!=null">
+        where type=#{type}
+      </if>
+    </select>
+    <select id="selectByCnT" resultType="com.ikun.mesg.pojo.Message">
+      select
+          <include refid="Base_Column_List"/>
+          <bind name="newContent" value="'%'+content+'%'"/>
+          from message where title like #{newContent}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from message

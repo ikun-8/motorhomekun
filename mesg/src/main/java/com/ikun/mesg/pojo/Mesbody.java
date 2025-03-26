@@ -1,10 +1,12 @@
 package com.ikun.mesg.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -15,8 +17,8 @@ public class Mesbody implements Serializable {
     private Integer mid;
 
     private String uid;
-
-    private Date time;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate time;
 
     private String content;
 
