@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Random;
 
 @SpringBootTest
@@ -37,7 +38,7 @@ class MesgApplicationTests {
             int year = rand.nextInt(50) + 1985;
             int month = rand.nextInt(12) + 1;
             int day = rand.nextInt(29) + 1;
-            LocalDate l = LocalDate.of(year, month, day);
+            Date l = new Date(year, month, day);
             m.setTime(l);
             if (mapper.insertSelective(m) > 0)
                 System.out.println("插入成功");
@@ -55,7 +56,7 @@ class MesgApplicationTests {
             int year = rand.nextInt(50) + 1985;
             int month = rand.nextInt(12) + 1;
             int day = rand.nextInt(29) + 1;
-            LocalDate l = LocalDate.of(year, month, day);
+            Date l =new Date(year, month, day);
             m.setTime(l);
             if (mesbodyMapper.insertSelective(m) > 0)
                 System.out.println("插入成功");

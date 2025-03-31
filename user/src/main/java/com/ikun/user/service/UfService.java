@@ -1,5 +1,6 @@
 package com.ikun.user.service;
 
+import com.ikun.user.pojo.Collect;
 import com.ikun.user.pojo.User;
 
 public interface UfService {
@@ -9,4 +10,10 @@ public interface UfService {
     int update(User u);
 
     int delete(String id);
+
+    int addCollect(Collect c);
+
+    int revCollect(Collect c);
+
+    Collect queCollect(Collect c);
 }

@@ -22,7 +22,7 @@ public class MfController {
     MfService mfService;
     @RequestMapping("/search")
     public ResultMsg search(String content){
-        System.out.println(content);
+//        System.out.println(content);
         Map<String,Object> data=new LinkedHashMap();
         List<Message> mes=mfService.search(content);
         data.put("total",mes.size());
@@ -31,7 +31,7 @@ public class MfController {
     }
     @RequestMapping("/show")
     public ResultMsg show(String type){
-        System.out.println(type);
+//        System.out.println(type);
         Map<String,Object> data=new LinkedHashMap();
         List<Message> mes=mfService.show(type);
         data.put("total",mes.size());
@@ -65,6 +65,22 @@ public class MfController {
     public ResultMsg searchBody(String uid){
         Map<String,Object> data=new LinkedHashMap();
         List<Mesbody> mes=mfService.searchBody(uid);
+        data.put("total",mes.size());
+        data.put("mesBody",mes);
+        return new ResultMsg(200,data,"查询成功");
+    }
+    @RequestMapping("/addBody")
+    public ResultMsg addBody(@RequestBody Mesbody m){
+        int i=mfService.addBody(m);
+        if(i>0)
+            return new ResultMsg(200,"新增成功");
+        else
+            return new ResultMsg(200,"新增失败");
+    }
+    @RequestMapping("/queBody")
+    public ResultMsg queBody(String mid){
+        Map<String,Object> data=new LinkedHashMap();
+        List<Mesbody> mes=mfService.queBody(mid);
         data.put("total",mes.size());
         data.put("mesBody",mes);
         return new ResultMsg(200,data,"查询成功");

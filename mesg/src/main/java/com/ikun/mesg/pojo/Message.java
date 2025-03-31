@@ -22,8 +22,8 @@ public class Message implements Serializable {
     private String title;
 
     private String type;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate time;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date time;
 
     private String content;
 

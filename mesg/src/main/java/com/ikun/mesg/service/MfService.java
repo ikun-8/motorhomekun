@@ -13,4 +13,8 @@ public interface MfService {
     public int delete(String uid);
 
     List<Mesbody> searchBody(String uid);
+
+    int addBody(Mesbody m);
+
+    List<Mesbody> queBody(String mid);
 }

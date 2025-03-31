@@ -50,4 +50,14 @@ public class MfServiceImpl implements MfService {
     public List<Mesbody> searchBody(String uid) {
         return mesbodyMapper.selectByUid(uid);
     }
+
+    @Override
+    public int addBody(Mesbody m) {
+        return mesbodyMapper.insertSelective(m);
+    }
+
+    @Override
+    public List<Mesbody> queBody(String mid) {
+        return mesbodyMapper.selectByMid(Integer.valueOf(mid));
+    }
 }

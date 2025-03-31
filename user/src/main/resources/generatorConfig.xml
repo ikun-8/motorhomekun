@@ -58,7 +58,7 @@
 		<!--  需要逆向 enableCountByExample="false" enableUpdateByExample="false"
                   enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
                   -->
-		<table tableName="realtion" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+		<table tableName="collect" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
 			<!-- <columnOverride column="ID" javaType="java.lang.Integer"></columnOverride>
                         <columnOverride column="dept" javaType="java.lang.Integer"></columnOverride> -->
 		</table>

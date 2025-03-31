@@ -147,7 +147,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ikun.user.pojo.User">
+    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.user.pojo.User">
     update user
     <set>
       <if test="name != null">

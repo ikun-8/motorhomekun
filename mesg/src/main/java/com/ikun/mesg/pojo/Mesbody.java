@@ -17,8 +17,8 @@ public class Mesbody implements Serializable {
     private Integer mid;
 
     private String uid;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate time;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date time;
 
     private String content;
 

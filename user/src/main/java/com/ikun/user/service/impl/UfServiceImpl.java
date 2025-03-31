@@ -1,7 +1,9 @@
 package com.ikun.user.service.impl;
 
 //import com.ikun.user.mapper.RealtionMapper;
+import com.ikun.user.mapper.CollectMapper;
 import com.ikun.user.mapper.UserMapper;
+import com.ikun.user.pojo.Collect;
 import com.ikun.user.pojo.User;
 import com.ikun.user.service.UfService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class UfServiceImpl implements UfService {
     UserMapper userMapper;
 //    @Autowired
 //    RealtionMapper realtionMapper;
+    @Autowired
+    CollectMapper collectMapper;
+
     @Override
     public User login(User u) {
 
@@ -36,5 +41,20 @@ public class UfServiceImpl implements UfService {
     public int delete(String id) {
 //        return userMapper.logof(Integer.valueOf(id));
         return 1;
+    }
+
+    @Override
+    public int addCollect(Collect c) {
+        return collectMapper.insertSelective(c);
+    }
+
+    @Override
+    public int revCollect(Collect c) {
+        return collectMapper.remove(c);
+    }
+
+    @Override
+    public Collect queCollect(Collect c) {
+        return collectMapper.que(c);
     }
 }
