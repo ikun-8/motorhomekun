@@ -9,6 +9,8 @@ import com.ikun.user.service.UfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UfServiceImpl implements UfService {
@@ -56,5 +58,15 @@ public class UfServiceImpl implements UfService {
     @Override
     public Collect queCollect(Collect c) {
         return collectMapper.que(c);
+    }
+
+    @Override
+    public List<Collect> listCollect(String uid) {
+        return collectMapper.selectByPrimaryKey(Integer.valueOf(uid));
+    }
+
+    @Override
+    public User quire(String id) {
+        return userMapper.selectByPrimaryKey(Integer.valueOf(id));
     }
 }

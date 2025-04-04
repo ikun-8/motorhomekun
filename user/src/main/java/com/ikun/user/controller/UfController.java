@@ -1,20 +1,30 @@
 package com.ikun.user.controller;
 
 
+import com.ikun.goods.pojo.Goods;
+import com.ikun.user.feign.GoodsFeignService;
 import com.ikun.user.pojo.Collect;
 import com.ikun.user.pojo.ResultMsg;
 import com.ikun.user.pojo.User;
 import com.ikun.user.service.UfService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/user")
 @RestController
 public class UfController {
     @Autowired
     UfService ufService;
+    @Autowired
+    GoodsFeignService goodsFeignService;
 
     @RequestMapping("/login")
     public ResultMsg login(@RequestBody User u){
@@ -72,5 +82,23 @@ public class UfController {
             return new ResultMsg(200,"查询成功");
         else
             return new ResultMsg(400,"查询失败");
+    }
+    @RequestMapping("/listCollect")
+    public ResultMsg listCollect(String uid){
+        System.out.println(uid);
+        Map<String,Object> data=new LinkedHashMap();
+        List<Collect> cols=ufService.listCollect(uid);
+        List<Goods> goods=new ArrayList<>();
+        for(Collect c:cols){
+            System.out.println(c.getGid());
+            goods.add(goodsFeignService.quire2(String.valueOf(c.getGid())));
+        }
+        data.put("total",cols.size());
+        data.put("cols",goods);
+        return new ResultMsg(200,data,"查询成功");
+    }
+    @RequestMapping("/quire/{id}")
+    public User quire(@PathVariable("id") String id){
+        return ufService.quire(id);
     }
 }

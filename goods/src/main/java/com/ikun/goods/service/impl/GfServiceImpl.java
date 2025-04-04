@@ -59,4 +59,9 @@ public class GfServiceImpl implements GfService {
     public int add(Goods g) {
         return goodsMapper.insertSelective(g);
     }
+
+    @Override
+    public Goods quire(String id) {
+        return goodsMapper.selectByPrimaryKey(Integer.valueOf(id));
+    }
 }

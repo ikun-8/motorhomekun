@@ -2,6 +2,8 @@ package com.ikun.user.mapper;
 
 import com.ikun.user.pojo.Collect;
 
+import java.util.List;
+
 public interface CollectMapper {
     int deleteByPrimaryKey(Integer uid);
 
@@ -9,7 +11,7 @@ public interface CollectMapper {
 
     int insertSelective(Collect record);
 
-    Collect selectByPrimaryKey(Integer uid);
+    List<Collect> selectByPrimaryKey(Integer uid);
 
     int updateByPrimaryKeySelective(Collect record);
 

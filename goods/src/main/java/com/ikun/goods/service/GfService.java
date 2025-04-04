@@ -13,4 +13,5 @@ public interface GfService {
     public int update(Goods g);
     public int delete(String id);
     public int add(Goods g);
+    public Goods quire(String id);
 }

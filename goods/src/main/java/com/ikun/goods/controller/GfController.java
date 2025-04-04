@@ -4,10 +4,7 @@ import com.ikun.goods.pojo.Goods;
 import com.ikun.goods.pojo.ResultMsg;
 import com.ikun.goods.service.GfService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -67,6 +64,18 @@ public class GfController {
             return new ResultMsg(200,"删除成功");
         else
             return new ResultMsg(400,"删除失败");
+
+    }
+    @RequestMapping("/quire")
+    public ResultMsg quire(String id){
+
+        return new ResultMsg(200,gfService.quire(id),"查询成功");
+
+    }
+    @RequestMapping("/quire2/{id}")
+    public Goods quire2(@PathVariable("id") String id){
+
+        return gfService.quire(id);
 
     }
 }
