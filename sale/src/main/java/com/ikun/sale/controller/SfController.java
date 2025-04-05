@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/sale")
 @RestController
@@ -28,7 +30,28 @@ public class SfController {
 
     @RequestMapping("/search")
     public ResultMsg search(@RequestBody Sale s){
-        List<Sale> data=sfService.search(s);
+        Map<String,Object> data=new LinkedHashMap();
+        List<Sale> sales=sfService.search(s);
+        data.put("total",sales.size());
+        data.put("sales",sales);
+        return new ResultMsg(200,data,"查询成功");
+
+    }
+    @RequestMapping("/searchByb")
+    public ResultMsg searchByb(String buyer){
+        Map<String,Object> data=new LinkedHashMap();
+        List<Sale> sales=sfService.search2(buyer);
+        data.put("total",sales.size());
+        data.put("sales",sales);
+        return new ResultMsg(200,data,"查询成功");
+
+    }
+    @RequestMapping("/searchBys")
+    public ResultMsg searchBys(String seller){
+        Map<String,Object> data=new LinkedHashMap();
+        List<Sale> sales=sfService.search3(seller);
+        data.put("total",sales.size());
+        data.put("sales",sales);
         return new ResultMsg(200,data,"查询成功");
 
     }
@@ -50,7 +73,7 @@ public class SfController {
     public ResultMsg add(@RequestBody Sale s){
         try {
 //            goodsFeignService.show();
-            User u=userFeignService.quire(s.getDef1());
+            User u=userFeignService.quire(s.getBuyer());
             String price=goodsFeignService.quire2(s.getGoodsid()).getPrice();
             u.setPoints(u.getPoints()+Integer.parseInt(price.substring(0,price.length()-5)));
             userFeignService.update(u);

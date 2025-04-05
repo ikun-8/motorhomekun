@@ -17,10 +17,14 @@
     <result column="def2" jdbcType="VARCHAR" property="def2" />
     <result column="def3" jdbcType="VARCHAR" property="def3" />
     <result column="def4" jdbcType="VARCHAR" property="def4" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="coins" jdbcType="VARCHAR" property="coins" />
+    <result column="carcoins" jdbcType="VARCHAR" property="carcoins" />
+    <result column="prestige" jdbcType="VARCHAR" property="prestige" />
   </resultMap>
   <sql id="Base_Column_List">
     id, `name`, password, qq, address, wx, points, headpic, fans, concern, status, def1,
-    def2, def3, def4
+    def2, def3, def4, `date`, coins, carcoins, prestige
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,13 +32,13 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="selectByUnP" resultType="com.ikun.user.pojo.User">
-      select
-          <include refid="Base_Column_List"/>
-      from user
-      where `name`=#{name} and password=#{password}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByUnP" resultType="com.ikun.user.pojo.User">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where `name`=#{name} and password=#{password}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -43,12 +47,16 @@
       qq, address, wx, points, 
       headpic, fans, concern, 
       status, def1, def2, 
-      def3, def4)
+      def3, def4, date, 
+      coins, carcoins, prestige
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{qq,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{wx,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER}, 
       #{headpic,jdbcType=VARCHAR}, #{fans,jdbcType=INTEGER}, #{concern,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, 
-      #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR})
+      #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+      #{coins,jdbcType=VARCHAR}, #{carcoins,jdbcType=VARCHAR}, #{prestige,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ikun.user.pojo.User">
     insert into user
@@ -57,7 +65,7 @@
         id,
       </if>
       <if test="name != null">
-        name,
+        `name`,
       </if>
       <if test="password != null">
         password,
@@ -97,6 +105,18 @@
       </if>
       <if test="def4 != null">
         def4,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="coins != null">
+        coins,
+      </if>
+      <if test="carcoins != null">
+        carcoins,
+      </if>
+      <if test="prestige != null">
+        prestige,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -145,9 +165,21 @@
       <if test="def4 != null">
         #{def4,jdbcType=VARCHAR},
       </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coins != null">
+        #{coins,jdbcType=VARCHAR},
+      </if>
+      <if test="carcoins != null">
+        #{carcoins,jdbcType=VARCHAR},
+      </if>
+      <if test="prestige != null">
+        #{prestige,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.user.pojo.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ikun.user.pojo.User">
     update user
     <set>
       <if test="name != null">
@@ -192,6 +224,18 @@
       <if test="def4 != null">
         def4 = #{def4,jdbcType=VARCHAR},
       </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coins != null">
+        coins = #{coins,jdbcType=VARCHAR},
+      </if>
+      <if test="carcoins != null">
+        carcoins = #{carcoins,jdbcType=VARCHAR},
+      </if>
+      <if test="prestige != null">
+        prestige = #{prestige,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -210,7 +254,11 @@
       def1 = #{def1,jdbcType=VARCHAR},
       def2 = #{def2,jdbcType=VARCHAR},
       def3 = #{def3,jdbcType=VARCHAR},
-      def4 = #{def4,jdbcType=VARCHAR}
+      def4 = #{def4,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      coins = #{coins,jdbcType=VARCHAR},
+      carcoins = #{carcoins,jdbcType=VARCHAR},
+      prestige = #{prestige,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

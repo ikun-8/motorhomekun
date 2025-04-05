@@ -31,5 +31,10 @@ public class Sale implements Serializable {
 
     private String shopname;
 
+    private String buyer;
+
+    private String seller;
+
     private static final long serialVersionUID = 1L;
+
 }

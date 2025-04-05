@@ -78,6 +78,12 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.data</groupId>-->
+<!--            <artifactId>spring-data-redis</artifactId>-->
+<!--&lt;!&ndash;            <version>3.3.4</version>&ndash;&gt;-->
+<!--        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>

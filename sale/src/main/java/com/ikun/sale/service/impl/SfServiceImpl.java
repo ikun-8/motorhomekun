@@ -18,6 +18,16 @@ public class SfServiceImpl implements SfService {
     }
 
     @Override
+    public List<Sale> search2(String buyer) {
+        return saleMapper.filter2(buyer);
+    }
+
+    @Override
+    public List<Sale> search3(String seller) {
+        return saleMapper.filter3(seller);
+    }
+
+    @Override
     public int delete(String id) {
         return saleMapper.remove(Integer.valueOf(id));
     }

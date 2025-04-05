@@ -15,6 +15,8 @@ import java.util.Map;
 public class GfController {
     @Autowired
     GfService gfService;
+//    @Autowired
+//    RedisUtils redisUtils;
 
     @RequestMapping("/search")
     public ResultMsg search(@RequestBody Goods g){
@@ -29,10 +31,19 @@ public class GfController {
     }
     @RequestMapping("/show")
     public ResultMsg show(){
-        List<Goods> goods=gfService.show();
         Map<String,Object> data=new LinkedHashMap();
-        data.put("total",goods.size());
-        data.put("goods",goods);
+//        if(redisUtils.get("goods")==null){
+            List<Goods> goods=gfService.show();
+            data.put("total",goods.size());
+            data.put("goods",goods);
+//            redisUtils.set("gtotal",goods.size());
+//            redisUtils.set("goods",goods);
+//        }else {
+//            data.put("total",redisUtils.get("gtotal"));
+//            data.put("goods",redisUtils.get("goods"));
+//
+//        }
+
         return new ResultMsg(200,data,"查询成功");
 
     }

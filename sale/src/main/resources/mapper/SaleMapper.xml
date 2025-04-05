@@ -11,15 +11,33 @@
     <result column="def3" jdbcType="VARCHAR" property="def3" />
     <result column="def4" jdbcType="VARCHAR" property="def4" />
     <result column="shopname" jdbcType="VARCHAR" property="shopname" />
+    <result column="buyer" jdbcType="VARCHAR" property="buyer" />
+    <result column="seller" jdbcType="VARCHAR" property="seller" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, time, goodsid, status, def1, def2, def3, def4, shopname
+    id, time, goodsid, status, def1, def2, def3, def4, shopname, buyer, seller
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sale
     where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="filter" resultType="com.ikun.sale.pojo.Sale">
+    select
+    <include refid="Base_Column_List"/>
+    from sale where id=#{id}
+    </select>
+  <select id="filter2" resultType="com.ikun.sale.pojo.Sale">
+    select
+    <include refid="Base_Column_List"/>
+    from sale where buyer=#{buyer} and status='1'
+  </select>
+  <select id="filter3" resultType="com.ikun.sale.pojo.Sale">
+    select
+    <include refid="Base_Column_List"/>
+    from sale where seller=#{seller} and status='1'
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sale
@@ -28,12 +46,12 @@
   <insert id="insert" parameterType="com.ikun.sale.pojo.Sale">
     insert into sale (id, time, goodsid, 
       status, def1, def2, 
-      def3, def4, shopname
-      )
+      def3, def4, shopname, 
+      buyer, seller)
     values (#{id,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{goodsid,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, 
-      #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR}
-      )
+      #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR}, 
+      #{buyer,jdbcType=VARCHAR}, #{seller,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ikun.sale.pojo.Sale">
     insert into sale
@@ -65,6 +83,12 @@
       <if test="shopname != null">
         shopname,
       </if>
+      <if test="buyer != null">
+        buyer,
+      </if>
+      <if test="seller != null">
+        seller,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -93,6 +117,12 @@
       </if>
       <if test="shopname != null">
         #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer != null">
+        #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null">
+        #{seller,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -123,6 +153,12 @@
       <if test="shopname != null">
         shopname = #{shopname,jdbcType=VARCHAR},
       </if>
+      <if test="buyer != null">
+        buyer = #{buyer,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null">
+        seller = #{seller,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -135,14 +171,12 @@
       def2 = #{def2,jdbcType=VARCHAR},
       def3 = #{def3,jdbcType=VARCHAR},
       def4 = #{def4,jdbcType=VARCHAR},
-      shopname = #{shopname,jdbcType=VARCHAR}
+      shopname = #{shopname,jdbcType=VARCHAR},
+      buyer = #{buyer,jdbcType=VARCHAR},
+      seller = #{seller,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="remove">
-
-
+    update sale set status='0' where id=#{id}
   </update>
-  <select id="filter">
-
-    </select>
 </mapper>

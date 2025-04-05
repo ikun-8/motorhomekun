@@ -20,6 +20,8 @@ import java.util.Map;
 public class MfController {
     @Autowired
     MfService mfService;
+//    @Autowired
+//    RedisUtils redisUtils;
     @RequestMapping("/search")
     public ResultMsg search(String content){
 //        System.out.println(content);
@@ -31,12 +33,18 @@ public class MfController {
     }
     @RequestMapping("/show")
     public ResultMsg show(String type){
-//        System.out.println(type);
         Map<String,Object> data=new LinkedHashMap();
-        List<Message> mes=mfService.show(type);
-        data.put("total",mes.size());
-        data.put("mes",mes);
-//        System.out.println(mes);
+//        if(redisUtils.get("mes")==null){
+            List<Message> mes=mfService.show(type);
+            data.put("total",mes.size());
+            data.put("mes",mes);
+//            redisUtils.set("mes",mes);
+//            redisUtils.set("mtotal",mes.size());
+//        }else {
+//            data.put("mes",redisUtils.get("mes"));
+//            data.put("total",redisUtils.get("mtotal"));
+//        }
+
         return new ResultMsg(200,data,"查询成功");
     }
     @RequestMapping("/update")
@@ -63,6 +71,7 @@ public class MfController {
     }
     @RequestMapping("/searchBody")
     public ResultMsg searchBody(String uid){
+        System.out.println(uid);
         Map<String,Object> data=new LinkedHashMap();
         List<Mesbody> mes=mfService.searchBody(uid);
         data.put("total",mes.size());

@@ -18,6 +18,8 @@ public interface SaleMapper {
     int updateByPrimaryKey(Sale record);
 
     List<Sale> filter(Sale s);
+    List<Sale> filter2(String buyer);
+    List<Sale> filter3(String seller);
 
-    int remove(Integer integer);
+    int remove(Integer id);
 }

@@ -16,5 +16,4 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByUnP(User u);
-
 }
